@@ -54,7 +54,7 @@ img = np.zeros((512,512,3), np.uint8)
 cv2.namedWindow('image')
 cv2.setMouseCallback('image',MouseCallback)
 cv2.imshow('image',imgf)
-cv2.setMouseCallback('image',MouseCallback,2)
+#cv2.setMouseCallback('image',MouseCallback,2)
 
 plt.subplot(1,2,1), plt.imshow(im,cmap = 'gray')
 plt.title('Original Image')
