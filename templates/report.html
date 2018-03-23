@@ -1,54 +1,21 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="animate.css" type="text/css">
-    <title>X-Ray Report</title>
-  </head>
-  
-  <body>
-    <div class="jumbotron jumbotron-fluid "style="background-color:#0cb8b6;color:white;">
-      <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
-      </div>
-    </div>
-    <!-- The first column will be for image and the second column will be for the stats-->
-
-    <div class="container">
-      <div class="row">
-          <div class="col-6">
-            <div class="card animated zoomIn" style="width: 18rem;">
-              <img class="card-img-top" src="C:\Users\Public\Pictures\Sample Pictures\Hydrangeas.jpg" alt="Card image cap">
-              <div class="card-body" style="background-color:#0cb8b6;">
-                <h5 class="card-title text-white">The processed image</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="card animated zoomIn " style="width:18rem;background-color:#0cb8b6;">
-              <div class="card-header text-white">
-                Featured
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
-              </ul>
-            </div>
+{% extends 'layout.html' %}
+{% block body %}
+        <div class="card animated zoomIn" style="width: 18rem;">
+          <img class="card-img-top" src="C:\Users\Public\Pictures\Sample Pictures\Hydrangeas.jpg" alt="Card image cap">
+          <div class="card-body" style="background-color:#0cb8b6;">
+            <h5 class="card-title text-white">The processed image</h5>
           </div>
         </div>
-    </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+{%endblock%}
+{% block bod %}
+        <div class="card animated zoomIn" style="width:18rem;background-color:#0cb8b6;">
+          <div class="card-header text-white">
+            Featured
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+          </ul>
+        </div>
+{% endblock %}
