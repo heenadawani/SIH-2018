@@ -1,47 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout.html' %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hridhyanam - We Care</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
-  <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
-  <link rel="stylesheet" type="text/css" href="static/css/animate.css">
-
-</head>
-
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-  <!--banner-->
+{% block body %}
   <section id="banner" class="banner">
     <div class="bg-color">
-      <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-          <div class="col-md-12">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				      </button>
-              <a class="navbar-brand" href="#"><span style="color:white;font-family:'Josefin Sans';">Hridhyanam</span></a>
-            </div>
-            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#banner">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#upload">Upload</a></li>
-                <li><a href="#testimonial">Testimonial</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
       <div class="container">
         <div class="row">
           <div class="banner-info">
@@ -50,7 +11,6 @@
             </div>
             <div class="banner-text text-center">
               <h1 class="white animated zoomIn">Heart Care at your desk!</h1>
-              <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br>tempor incididunt ut labore et dolore magna aliqua.</p>-->
               <a href="#upload" class="btn btn-form">Upload Scan</a>
             </div>
             <div class="overlay-detail text-center">
@@ -84,32 +44,32 @@
   <!--/ about-->
 
   <!--upload-->
-  <section id="upload" class="section-padding">	
+<section id="upload" class="section-padding">	
 	<div class="container">
 		<div class="content">
 			<h2 class="ser-title">File Upload</h2>
 			<hr class="botm-line">
-			<div class="row">
-				<form action="" method="post" enctype="multipart/form-data">
-					<div class="col-md-6 col-sm-6">
-						<p class="text-center">Select image to upload:</p>
-					</div>	
-					<div class="col-md-6 col-sm-6">	
-						<input type="file" name="file" id="file" multiple="multiple">
-					</div>
-      </div>   
-      <br>
-      <div class="row"> 
-          <div class="col-md-4 col-sm-4"></div>	
-					<div class="col-md-4 col-sm-4">	
-						<input type="submit" class="btn btn-form btn-block" style="background-color:#0cb8b6;color:white;" value="Upload" name="submit">
-						<input type="hidden" value="" name="_token">
-					</div>	
-				</form>
+      <form action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+                <div class="col-md-6 col-sm-6">
+                  <p class="text-center">Select image to upload:</p>
+                </div>	
+                <div class="col-md-6 col-sm-6">	
+                  <input type="file" name="file" id="file" multiple="multiple">
+                </div>
+        </div>   
+        <br>
+        <div class="row"> 
+            <div class="col-md-4 col-sm-4"></div>	
+            <div class="col-md-4 col-sm-4">	
+              <input type="submit" class="btn btn-form btn-block" style="background-color:#0cb8b6;color:white;" value="Upload" name="submit">
+              <input type="hidden" value="" name="_token">
+            </div>
+        </div>    	
+			</form>
 			</div>		
-		</div>
 	</div>
-  </section>
+</section>
   <!--/ upload-->
 
   <!--testimonial-->
@@ -183,7 +143,6 @@
                 <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                 <div class="validation"></div>
               </div>
-
               <div class="form-action">
                 <button type="submit" class="btn btn-form">Send Message</button>
               </div>
@@ -193,26 +152,4 @@
       </div>
     </div>
   </section>
-  <!--/ contact-->
-  <!--footer-->
-  <footer id="footer">
-    <div class="footer-line">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            © Copyright Hridayam. All Rights Reserved.
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!--/ footer-->
-
-  <script src="static/js/jquery.min.js"></script>
-  <script src="static/js/jquery.easing.min.js"></script>
-  <script src="static/js/bootstrap.min.js"></script>
-  <script src="static/js/custom.js"></script>
-
-</body>
-
-</html>
+{% endblock %}
