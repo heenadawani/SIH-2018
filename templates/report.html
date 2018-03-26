@@ -1,4 +1,4 @@
-{% include '_top.html' %}
+{% include 'includes/_top.html' %}
 
 <nav class="navbar navbar-default bg-report">
     <div class="container">
@@ -13,11 +13,10 @@
         </div>
         <div class="collapse navbar-collapse navbar-right" id="myNavbar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#banner">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#upload">Upload</a></li>
-            <li><a href="#testimonial">Testimonial</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Upload</a></li>
+            <li><a href="">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -42,11 +41,13 @@
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">CTR</li>
+                <li class="list-group-item">{{ result }}</li>
               </ul>
+                
             </div>
           </div>
       </div>
     </div>
 </section>  
 
-{% include '_footer.html' %}  
+{% include 'includes/_footer.html' %}  

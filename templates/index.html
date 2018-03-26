@@ -49,13 +49,13 @@
   		<div class="content">
   			<h2 class="ser-title">File Upload</h2>
   			<hr class="botm-line">
-        <form action="{{url_for('upload')}}" method="post" enctype="multipart/form-data">
+        <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
           <div class="row">
                   <div class="col-md-6 col-sm-6">
                     <p class="text-center">Select image to upload:</p>
                   </div>
                   <div class="col-md-6 col-sm-6">
-                    <input type="file" name="inputFile" id="inputFile" multiple="multiple">
+                    <input type="file" name="photo" id="inputFile" multiple="multiple">
                   </div>
           </div>
           <br>
@@ -63,7 +63,6 @@
               <div class="col-md-4 col-sm-4"></div>
               <div class="col-md-4 col-sm-4">
                 <input type="submit" class="btn btn-form btn-block" style="background-color:#0cb8b6;color:white;" value="Upload" name="submit">
-                <input type="hidden" value="" name="_token">
               </div>
           </div>
   			</form>
