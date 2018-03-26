@@ -4,7 +4,7 @@ clear all;
 ref=imread('reference.png');
 reference=im2uint16(ref);
 %imshow(i);
-i = imread('00030384_000.png');
+i = imread('00010225_000.png');
 %[ssimval, ssimmap] = ssim(i,reference);
 %imshow(ssimmap);[ssimval, ssimmap] = ssim(imidx==i,ref);
 %%
@@ -22,6 +22,23 @@ p=double(p);
 %p = entropyfilt(p);
 [idx, nn] = kmeans(p,8);
 imidx=reshape(idx,size(i));
+imidxcopy = reshape(idx, size(i));
+%%
+%[width,height,color] = size(imidxcopy==1);
+%heightnew = height*0.8;
+%widthnew = width*0.8;
+%xcoord = width*0.1;
+%ycoord = height*0.1;
+%r = imrect(gca,[xcoord ycoord widthnew heightnew]);
+%for j=1:8
+%    h_im = imshow(imidxcopy==1);
+%    BW = createMask(r,h_im);
+%    ROI = (imidxcopy==1);
+%    ROI(BW == 0) = 0;
+%end    
+%figure, imshow(ROI);
+
+
 %%
 %figure,
     subplot(2,4,1),imshow(imidx==1);
@@ -41,7 +58,8 @@ imidx=reshape(idx,size(i));
     si=0;
     ti=0;
     for i = 1:8        
-        [ssimval, ssimmap] = ssim(im2uint16(imidx==i),reference);
+        ssimval = immse(im2uint16(imidx==i),reference);
+        disp(ssimval)
         if(ssimval>f)
             t=s;
             ti=si
@@ -76,4 +94,6 @@ frame2 = (imidx == si);
 bw = frame1 | frame2 ;
 %bw = bwareafilt(bw,2);
 figure,imshow(bw);
-
+bw=~bw;
+lungsonly = bwareafilt(bw,2);
+imshow(lungsonly)
