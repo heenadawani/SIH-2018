@@ -49,13 +49,14 @@
   		<div class="content">
   			<h2 class="ser-title">File Upload</h2>
   			<hr class="botm-line">
-        <form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+        <form action = "http://localhost:5000/uploader" method = "POST" 
+         enctype = "multipart/form-data">
           <div class="row">
                   <div class="col-md-6 col-sm-6">
                     <p class="text-center">Select image to upload:</p>
                   </div>
                   <div class="col-md-6 col-sm-6">
-                    <input type="file" name="photo" id="inputFile" multiple="multiple">
+                    <input type = "file" name = "file" multiple />
                   </div>
           </div>
           <br>

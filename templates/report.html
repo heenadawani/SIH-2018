@@ -24,30 +24,26 @@
 </nav>  
 
 <section class="container">
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color: white;">
       <div class="row">
           <div class="col-md-6 col-sm-6">
             <div class="card animated zoomIn" style="width: 18rem;">
-              <img class="card-img-top" src="static/img/dummy.jpg" alt="Processed Image" width="200" height="200">
+              <h5 class="card-title">Processed Image</h5>
               <div class="card-body" style="background-color:#0cb8b6;">
-                <h5 class="card-title text-white">Processed Image</h5>
+                <img class="card-img-top" src="static/img/dummy.jpg" alt="Processed Image" width="200" height="200">
               </div>
             </div>
           </div>
           <div class="col-md-6 col-sm-6">
-            <div class="card animated zoomIn " style="width:18rem;background-color:#0cb8b6;">
-              <div class="card-header text-white">
-                Features
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">CTR</li>
-                <li class="list-group-item">{{ result }}</li>
-              </ul>
-                
+            <div class="card animated zoomIn" style="width:30rem;background-color:#0cb8b6;">
+                <div class="card-header" style="color:white;">Report</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{ result }}</li>
+                    </ul>
+                </div> 
             </div>
           </div>
       </div>
     </div>
-</section>  
-
-{% include 'includes/_footer.html' %}  
+</section>   
