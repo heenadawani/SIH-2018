@@ -10,9 +10,9 @@ def deepLearning():
 	epoch=100
 	step=500
 
-	img_test_dir='C:\\xampp\\htdocs\\smartindiahackathon\\static\\uploads'
+	img_test_dir='D:\\code\\SIH-2018\\static\\preprocessed'
 
-	model_name="C:\\xampp\\htdocs\\smartindiahackathon\\static\\deeplearning\\SIH-PA-n=2c-0.001-50-10-500-8conv-basic.model"
+	model_name="D:\\code\\SIH-2018\\deeplearning\\SIH-Proc-n=2c-0.001-50-25-500-8conv-basic.model.meta"
 
 	import tflearn
 	from tflearn.layers.conv import conv_2d, max_pool_2d

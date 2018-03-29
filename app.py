@@ -1,8 +1,9 @@
 import os
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-#from deeplearning.predict import deepLearning
+from deeplearning.predict import deepLearning
 from werkzeug import secure_filename
+from imageprocessing import imageProcessing
 
 app = Flask(__name__)
 
@@ -20,7 +21,9 @@ def index():
 
 @app.route('/report')
 def report():
-    return render_template('report.html',result="Hey i am here.")
+	result=deepLearning()
+	os.system('cls')
+	return render_template('report.html',result=result)
 	
 @app.route('/uploader', methods = ['POST'])
 def uploader():
@@ -31,7 +34,8 @@ def uploader():
 	for f in request.files.getlist('file'):
 		filename = secure_filename(f.filename)
 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-	return 'Image Upload Successful.'	
+	imageProcessing()	
+	return redirect(url_for('report'))	
 
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
