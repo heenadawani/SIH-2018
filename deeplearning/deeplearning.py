@@ -24,37 +24,37 @@ def deepLearning():
 
 	convnet = input_data(shape=[None, img_size, img_size, 1], name='input')
 
-	convnet = conv_2d(convnet, 32, 2, activation='relu')
+	convnet = conv_2d(convnet, 32, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
-	convnet = conv_2d(convnet, 64, 2, activation='relu')
-	convnet = max_pool_2d(convnet, 2)
-
-
-	convnet = conv_2d(convnet, 32, 2, activation='relu')
-	convnet = max_pool_2d(convnet, 2)
-
-	convnet = conv_2d(convnet, 64, 2, activation='relu')
+	convnet = conv_2d(convnet, 64, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
 
-	convnet = conv_2d(convnet, 32, 2, activation='relu')
+	convnet = conv_2d(convnet, 32, 5, activation='relu')
+	convnet = max_pool_2d(convnet, 2)
+
+	convnet = conv_2d(convnet, 64, 5, activation='relu')
+	convnet = max_pool_2d(convnet, 2)
+
+
+	convnet = conv_2d(convnet, 32, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
 	
-	convnet = conv_2d(convnet, 64, 2, activation='relu')
+	convnet = conv_2d(convnet, 64, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
 
-	convnet = conv_2d(convnet, 32, 2, activation='relu')
+	convnet = conv_2d(convnet, 32, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
-	convnet = conv_2d(convnet, 64, 2, activation='relu')
+	convnet = conv_2d(convnet, 64, 5, activation='relu')
 	convnet = max_pool_2d(convnet, 2)
 
 
 	convnet = fully_connected(convnet, 1024, activation='relu')
-	convnet = dropout(convnet, 0.8)
+	convnet = dropout(convnet, 0.5)
 
 	
 	convnet = fully_connected(convnet, 2, activation='softmax')

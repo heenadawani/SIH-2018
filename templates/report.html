@@ -16,6 +16,13 @@
 
   <style>
 
+.footer {
+    position: absolute;
+    bottom: -1;
+    width: 100%;
+    background-color: #325C6A;
+}
+
 #loader {
   position: absolute;
   left: 50%;
@@ -43,11 +50,6 @@
   100% { transform: rotate(360deg); }
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
 </style>
 </head>
 
@@ -94,26 +96,28 @@ function showPage() {
 <div id="myDiv" style="display:none;">
   <section class="container">
     <div class="jumbotron" style="background-color: white;">
-      <div class="row">
-        <div class="col-4">
-          <div class="card" style="width: 20rem;">
-            <div class="col-4">
-            <img class="mx-auto d-block" src="static/preprocessed_images/{{img}}" alt="Processed Image" width="250" height="250">
-            </div>
-            <div class="card-body">
-              <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ name }}</span></h5>
-              <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ result }}</span></h5>
-              <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr }}</span></h5>
+      <div class="row" style="display:inline;">
+        {% for i in range(0,imgs|length) %}
+          <div class="col-md-4">
+            <div class="card" style="width: 20rem;">
+              <div class="col-4">
+              <img class="mx-auto d-block" src="static/preprocessed_images/{{imgs[i]}}" alt="Processed Image" width="250" height="250">
+              </div>  
+              <div class="card-body">
+                <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ imgs[i] }}</span></h5>
+                <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ results[i] }}</span></h5>
+                <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+              </div>
             </div>
           </div>
-        </div>
+          {% endfor %}
       </div>      
     </div>
   </section>
 </div>
-  
-<footer id="footer" class="footer">
-    <div class="footer-line">
+
+<footer class="footer">
+    <div class="footer-line bg-dark">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">

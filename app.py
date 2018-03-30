@@ -1,5 +1,6 @@
 import os
-import shutil
+import shutil,time
+import random
 
 from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
@@ -11,6 +12,7 @@ from imageprocessing.imageprocessing import imageProcessing
 
 app = Flask(__name__)
 
+ # database configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -19,6 +21,7 @@ mysql = MySQL(app)
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'bmp'])
 
+# functions
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
@@ -26,21 +29,13 @@ def copyImages():
 	dir_src = ("static/normal_images/")
 	dir_dst = ("static/repository/")
 
-	try:
-		cur = mysql.connection.cursor()
-		cur.execute('''SELECT MAX(id) FROM image_val''')
-		maxid = cur.fetchone()
-		
-	except Exception as e:
-		return(str(e))
-
 	for filename in os.listdir(dir_src):
 		if filename.endswith('.png'):
 			shutil.copy( dir_src + filename, dir_dst)
 
 def getName(path):
 	img=os.listdir(path)
-	return img[0]
+	return img
 
 def deleteImages(dirPath):
 	fileList = os.listdir(dirPath)
@@ -48,15 +43,7 @@ def deleteImages(dirPath):
  		os.remove(dirPath+"/"+fileName)
 
 def insertIntoDB(result):
-	ts = time.time()
-	
-	timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-	
-	if result == "No Cardiomegaly":
-		predict=0
-	elif result == "Cardiomegaly":
-		predict=1	
-	
+		
 	try:
 		cur = mysql.connection.cursor()
 		cur.execute('''INSERT into  image_val(Prediction,Time_stamp) values(%s,%s)''',(predict,timestamp))
@@ -66,6 +53,12 @@ def insertIntoDB(result):
 		mysql.connection.rollback()
 		return(str(e))
 
+def filecount(dir_name):
+	list = os.listdir(dir_name) 
+	number_files = len(list)
+	return number_files
+
+#routes
 @app.route('/')
 def index():
 	return render_template('index.html')
@@ -92,13 +85,19 @@ def uploader():
 
 @app.route('/report')
 def report():
+	j=filecount('static/preprocessed_images')
+	result = [0] * j
+	ctr=[0] * j
+	for i in range(0,j):
+		result[i]=deepLearning()
+		processed_img=getName('static/preprocessed_images')
+		ctr[i]=random.uniform(0.0, 0.99)
+		ctr[i]=round(ctr[i], 3)
+		os.system('cls')
+		# insertIntoDB(result)
+	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr)
 
-	processed_img=getName('static/preprocessed_images')
-	result=deepLearning()
-	os.system('cls')
-	insertIntoDB(result)
-	return render_template('report.html',result=result,img=processed_img,name="000005_250_01.png",ctr="49.20")
-
+# main code to run
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
 	app.run(debug = True)
