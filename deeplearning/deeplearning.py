@@ -11,7 +11,7 @@ def deepLearning():
 
 	img_test_dir='D:\\code\\SIH-2018\\static\\preprocessed_images'
 
-	model_name="D:\\code\\SIH-2018\\deeplearning\\SIH-Proc-n=2c-0.001-50-25-500-8conv-basic.model"
+	model_name="D:\\code\\SIH-2018\\deeplearning\\Processed_PA-0.001-100conv-basic-project-50.model"
 
 	import tflearn
 	from tflearn.layers.conv import conv_2d, max_pool_2d

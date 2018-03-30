@@ -1,7 +1,5 @@
 import os
 import shutil
-import time
-import datetime
 
 from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
@@ -12,6 +10,7 @@ from deeplearning.deeplearning import deepLearning
 from imageprocessing.imageprocessing import imageProcessing
 
 app = Flask(__name__)
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -98,7 +97,7 @@ def report():
 	result=deepLearning()
 	os.system('cls')
 	insertIntoDB(result)
-	return render_template('report.html',result=result,img=processed_img)
+	return render_template('report.html',result=result,img=processed_img,name="000005_250_01.png",ctr="49.20")
 
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
