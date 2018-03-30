@@ -1,6 +1,6 @@
 %a='F:\testing_ip'
 function precessing(a,b,n)
-myFolder = a;%source image
+myFolder = a; %source image
 if ~isdir(myFolder)
   %errorMessage = sprintf('Error: The following folder does not exist:\n%s', myFolder);%op 1
   uiwait(warndlg(errorMessage));
@@ -22,7 +22,7 @@ BW = im2bw(K,level);     %binary images
   %imwrite(imageArray);
   %imwrite(imageArray,fullfile('ResizedAx',H));
 baseFileName = sprintf('%d.png', k); % 
-fullFileName = fullfile(b, baseFileName);%destination image 
+fullFileName = fullfile(b, baseFileName); %destination image 
 imwrite(BW, fullFileName);
 % Force display to update immediately.
 drawnow;
