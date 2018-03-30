@@ -4,13 +4,12 @@ def deepLearning():
 	import cv2
 	import numpy as np
 
-
 	img_size =50
 	lr = 1e-3
 	epoch=100
 	step=500
 
-	img_test_dir='D:\\code\\SIH-2018\\static\\preprocessed'
+	img_test_dir='D:\\code\\SIH-2018\\static\\preprocessed_images'
 
 	model_name="D:\\code\\SIH-2018\\deeplearning\\SIH-Proc-n=2c-0.001-50-25-500-8conv-basic.model"
 
@@ -20,6 +19,7 @@ def deepLearning():
 	from tflearn.layers.estimator import regression
 
 	import tensorflow as tf
+
 	tf.reset_default_graph()
 
 	convnet = input_data(shape=[None, img_size, img_size, 1], name='input')
@@ -106,4 +106,5 @@ def deepLearning():
 	    else: str_label='Cardiomegaly'
 	        
 	    return str_label
-	        
+
+#delete the file after DL displays the result on the report --done
