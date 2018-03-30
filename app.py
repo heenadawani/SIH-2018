@@ -24,6 +24,10 @@ def copyImages():
 	    if filename.endswith('.png'):
 	        shutil.copy( dir_src + filename, dir_dst)
 
+def getName(path):
+	img=os.listdir(path)
+	return img[0]
+
 def deleteImages(dirPath):
 	fileList = os.listdir(dirPath)
 	for fileName in fileList:
@@ -35,6 +39,9 @@ def index():
 	
 @app.route('/uploader', methods = ['POST'])
 def uploader():
+
+	deleteImages("static/preprocessed_images")
+
 	if 'file' not in request.files:
 		flash('No file part')
 		return redirect(request.url)
@@ -46,30 +53,28 @@ def uploader():
 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		copyImages()
 
-	imageProcessing()
+	imageProcessing() #this will also empty the normal_images folder
 
 	return redirect(url_for('report'))	
 
 @app.route('/report')
 def report():
 
+	img=getName('static/preprocessed_images')
 	result=deepLearning()
 	os.system('cls')
 
-	deleteImages("static/preprocessed_images")
-
-	return render_template('report.html',result=result)
+	return render_template('report.html',result=result,img=img)
 
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
 	app.run(debug = True)
 
 #images should also get deleted after the work is done from normal images and preprocessed_images --done
-#insert the uploaded file into the 1.normal_images and 2.repository ---done
+#insert the uploaded file into the 1.normal_images and 2.repository --done
+#render the processed image instead of dummy image from the database --done
 
-#render the processed image instead of dummy image from the database
-
-#rename images after uploading them into the repository // will need database	
-#add the image details into the 3.database // will need database
+#rename images after uploading them into the repository // will need database
+#add the image details into the 3.database // will need database	
 #pass k as a parameter to rename the file. //will require database
 #insert the result into the table //will require database
