@@ -27,9 +27,20 @@ def copyImages():
 	dir_src = ("static/normal_images/")
 	dir_dst = ("static/repository/")
 
+	try:
+		cur = mysql.connection.cursor()
+		cur.execute('''SELECT MAX(id) FROM image_val''')
+		maxid = cur.fetchone()
+		
+	except Exception as e:
+		return(str(e))
+
 	for filename in os.listdir(dir_src):
-	    if filename.endswith('.png'):
-	        shutil.copy( dir_src + filename, dir_dst)
+		if filename.endswith('.png'):
+			shutil.copy( dir_src + filename, dir_dst)
+		# print(maxid)
+		# print(filename)
+		# os.rename(maxid,filename)
 
 def getName(path):
 	img=os.listdir(path)
@@ -45,9 +56,9 @@ def insertIntoDB(result):
 	
 	timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 	
-	if result== "No Cardiomegaly":
+	if result == "No Cardiomegaly":
 		predict=0
-	elif result== "Cardiomegaly":
+	elif result == "Cardiomegaly":
 		predict=1	
 	
 	try:
@@ -55,16 +66,13 @@ def insertIntoDB(result):
 		cur.execute('''INSERT into  image_val(Prediction,Time_stamp) values(%s,%s)''',(predict,timestamp))
 		mysql.connection.commit()
 
-		# cur.execute('''SELECT MAX(id) FROM example''')
-		# maxid = cur.fetchone()
-
 	except Exception as e:
 		mysql.connection.rollback()
 		return(str(e))
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+	return render_template('index.html')
 	
 @app.route('/uploader', methods = ['POST'])
 def uploader():
@@ -89,14 +97,12 @@ def uploader():
 @app.route('/report')
 def report():
 
-	img=getName('static/preprocessed_images')
+	processed_img=getName('static/preprocessed_images')
 	result=deepLearning()
 	os.system('cls')
 	insertIntoDB(result)
-	return render_template('report.html',result=result,img=img)
+	return render_template('report.html',result=result,img=processed_img)
 
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
 	app.run(debug = True)
-
-#rename images after uploading them into the repository	
