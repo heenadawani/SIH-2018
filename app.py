@@ -38,9 +38,6 @@ def copyImages():
 	for filename in os.listdir(dir_src):
 		if filename.endswith('.png'):
 			shutil.copy( dir_src + filename, dir_dst)
-		# print(maxid)
-		# print(filename)
-		# os.rename(maxid,filename)
 
 def getName(path):
 	img=os.listdir(path)
@@ -90,7 +87,7 @@ def uploader():
 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		copyImages()
 
-	imageProcessing() #this will also empty the normal_images folder
+	imageProcessing()
 
 	return redirect(url_for('report'))	
 

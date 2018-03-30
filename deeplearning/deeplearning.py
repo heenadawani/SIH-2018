@@ -106,5 +106,3 @@ def deepLearning():
 	    else: str_label='Cardiomegaly'
 	        
 	    return str_label
-
-#delete the file after DL displays the result on the report --done

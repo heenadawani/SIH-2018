@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2018 at 06:28 AM
+-- Generation Time: Mar 30, 2018 at 06:15 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.1.15
 
@@ -25,41 +25,60 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `image_val`
+-- Table structure for table `client_side_patient_info`
 --
 
-CREATE TABLE `image_val` (
-  `id` int(11) NOT NULL,
-  `Prediction` tinyint(1) NOT NULL,
-  `Time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+CREATE TABLE `client_side_patient_info` (
+  `Pid` varchar(8) NOT NULL,
+  `Pname` varchar(100) NOT NULL,
+  `Age` int(11) NOT NULL,
+  `Gender` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `image_val`
+-- Table structure for table `doctor`
 --
 
-INSERT INTO `image_val` (`id`, `Prediction`, `Time_stamp`) VALUES
-(1, 1, '2018-03-30 04:11:25');
+CREATE TABLE `doctor` (
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `image_index` varchar(30) NOT NULL,
+  `classifier` tinyint(1) NOT NULL,
+  `ctr` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `image_val`
+-- Indexes for table `client_side_patient_info`
 --
-ALTER TABLE `image_val`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `client_side_patient_info`
+  ADD PRIMARY KEY (`Pid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `doctor`
 --
+ALTER TABLE `doctor`
+  ADD PRIMARY KEY (`username`);
 
 --
--- AUTO_INCREMENT for table `image_val`
+-- Indexes for table `images`
 --
-ALTER TABLE `image_val`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`image_index`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

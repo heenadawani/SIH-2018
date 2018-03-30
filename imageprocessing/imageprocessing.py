@@ -16,5 +16,3 @@ def imageProcessing():
 		cv2.imwrite(path,img1)
 		newpath=os.path.join(emp,img)
 		os.rename(path,newpath)
-
-# file should be taken from normal_images and processed into preprocessed folder so DL can work on it --done
