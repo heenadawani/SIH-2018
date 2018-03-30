@@ -1,7 +1,7 @@
 import os
 from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
-from deeplearning.predict import deepLearning
+from predict import deepLearning
 from werkzeug import secure_filename
 from imageprocessing import imageProcessing
 
