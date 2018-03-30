@@ -1,15 +1,22 @@
 import os
 import shutil
+import time
+import datetime
 
 from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from werkzeug import secure_filename
-from flask_mysqldb import MySQL
+from flask.ext.mysqldb import MySQL 
 
 from deeplearning.deeplearning import deepLearning
 from imageprocessing.imageprocessing import imageProcessing
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'image_data'
+mysql = MySQL(app)
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'bmp'])
 
@@ -32,6 +39,28 @@ def deleteImages(dirPath):
 	fileList = os.listdir(dirPath)
 	for fileName in fileList:
  		os.remove(dirPath+"/"+fileName)
+
+def insertIntoDB(result):
+	ts = time.time()
+	
+	timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+	
+	if result== "No Cardiomegaly":
+		predict=0
+	elif result== "Cardiomegaly":
+		predict=1	
+	
+	try:
+		cur = mysql.connection.cursor()
+		cur.execute('''INSERT into  image_val(Prediction,Time_stamp) values(%s,%s)''',(predict,timestamp))
+		mysql.connection.commit()
+
+		# cur.execute('''SELECT MAX(id) FROM example''')
+		# maxid = cur.fetchone()
+
+	except Exception as e:
+		mysql.connection.rollback()
+		return(str(e))
 
 @app.route('/')
 def index():
@@ -63,18 +92,11 @@ def report():
 	img=getName('static/preprocessed_images')
 	result=deepLearning()
 	os.system('cls')
-
+	insertIntoDB(result)
 	return render_template('report.html',result=result,img=img)
 
 if __name__ == '__main__':
 	app.secret_key="sih2k18"
 	app.run(debug = True)
 
-#images should also get deleted after the work is done from normal images and preprocessed_images --done
-#insert the uploaded file into the 1.normal_images and 2.repository --done
-#render the processed image instead of dummy image from the database --done
-
-#rename images after uploading them into the repository // will need database
-#add the image details into the 3.database // will need database	
-#pass k as a parameter to rename the file. //will require database
-#insert the result into the table //will require database
+#rename images after uploading them into the repository	
