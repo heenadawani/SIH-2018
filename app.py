@@ -59,6 +59,20 @@ def filecount(dir_name):
 	number_files = len(list)
 	return number_files
 
+
+def automation():
+	eng = matlab.engine.start_matlab()
+	paths='D:\code\SIH-2018\static\preprocessed_images'
+	name=[]
+	ctr=[]
+	for i in os.listdir(paths):
+		name.append(i)
+	
+	for i in range(len(name)):
+		name[i]=os.path.join(paths,name[i])
+		ctr.append(eng.automationgg(name[i],nargout=1))
+	return ctr
+
 #routes
 @app.route('/')
 def index():
@@ -90,13 +104,14 @@ def report():
 	os.chdir('D:\code\SIH-2018')
 	j=filecount('static/preprocessed_images')
 	result = [0] * j
-	ctr=[0] * j
+	ctr=[]
 	for i in range(0,j):
 		result=deepLearning()
 		processed_img=getName('static/preprocessed_images')
-		ctr[i]=random.uniform(0.0, 0.99)
-		ctr[i]=round(ctr[i], 3)
-		os.system('cls')
+
+	ctr=automation()
+	print(ctr)
+		# os.system('cls')
 		# insertIntoDB(result)
 	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr)
 
