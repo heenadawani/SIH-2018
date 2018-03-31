@@ -31,7 +31,7 @@ def copyImages():
 	dir_dst = ("static/repository/")
 
 	for filename in os.listdir(dir_src):
-		if filename.endswith('.png'):
+		if filename.endswith('.png') or filename.endswith('.jpg') or filename.endswith('.jpeg') or filename.endswith('.bmp'):
 			shutil.copy( dir_src + filename, dir_dst)
 
 def getName(path):
@@ -47,7 +47,7 @@ def deleteImages(dirPath):
 def insertIntoDB(result):
 	try:
 		cur = mysql.connection.cursor()
-		cur.execute('''INSERT into  image_val(Prediction,Time_stamp) values(%s,%s)''',(predict,timestamp))
+		cur.execute('''INSERT into  image_val(classifier) values(%s)''',(predict))
 		mysql.connection.commit()
 
 	except Exception as e:
