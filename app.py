@@ -43,8 +43,8 @@ def deleteImages(dirPath):
 	for fileName in fileList:
  		os.remove(dirPath+"/"+fileName)
 
+#make changes here to insert data into the table. Only for reference
 def insertIntoDB(result):
-		
 	try:
 		cur = mysql.connection.cursor()
 		cur.execute('''INSERT into  image_val(Prediction,Time_stamp) values(%s,%s)''',(predict,timestamp))
@@ -94,8 +94,8 @@ def report():
 	for i in range(0,j):
 		result=deepLearning()
 		processed_img=getName('static/preprocessed_images')
-		# ctr[i]=random.uniform(0.0, 0.99)
-		# ctr[i]=round(ctr[i], 3)
+		ctr[i]=random.uniform(0.0, 0.99)
+		ctr[i]=round(ctr[i], 3)
 		os.system('cls')
 		# insertIntoDB(result)
 	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr)

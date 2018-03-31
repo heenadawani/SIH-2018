@@ -21,7 +21,7 @@ BW = im2bw(K,level);     %binary images
 %imshow(BW);  % Display image.
   %imwrite(imageArray);
   %imwrite(imageArray,fullfile('ResizedAx',H));
-baseFileName = sprintf('%d.png', k); % 
+%baseFileName = sprintf('%d.png', k); % 
 fullFileName = fullfile(b, baseFileName); %destination image 
 imwrite(BW, fullFileName);
 % Force display to update immediately.
