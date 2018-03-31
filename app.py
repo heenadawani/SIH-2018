@@ -113,7 +113,37 @@ def report():
 	print(ctr)
 		# os.system('cls')
 		# insertIntoDB(result)
-	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr)
+	disease=['Cardiomegaly','No Cardiomegaly']
+	gender=['M','F']
+	# os.chdir('D:\code\SIH-2018')
+	j=20
+	result = [0] * j
+	ctr=[0] * j
+	sex=[0] * j
+	age=[0] * j
+	for i in range(0,j):
+		result[i]=random.choice(disease)
+		sex[i]=random.choice(gender)
+		processed_img=getName('static/preprocessed_images')
+		ctr[i]=random.uniform(0.0, 0.99)
+		ctr[i]=round(ctr[i], 3)
+		age[i]=random.randint(0,100)
+		os.system('cls')
+		# insertIntoDB(result)
+	countred=0
+	countyellow=0
+	countgreen=0
+	countorange=0
+	for i in range(0,j):
+		if result[i]=='Cardiomegaly' and ctr[i]>0.5 :
+			countred+=1
+		elif result[i]=='Cardiomegaly' and ctr[i]<0.5:
+			countorange+=1
+		elif result[i]=='No Cardiomegaly' and ctr[i]>0.5 :
+			countyellow+=1
+		else:
+			countgreen+=1
+	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr,sex=sex,age=age,countred=countred,countgreen=countgreen,countorange=countorange,countyellow=countyellow)
 
 # main code to run
 if __name__ == '__main__':

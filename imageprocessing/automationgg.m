@@ -1,5 +1,6 @@
 function y = automationgg(a)
 i = imread(a);
+i=~i;
 [w,h] = size(i);
 sectionx = w*0.1;
 sectiony = h*0.5;

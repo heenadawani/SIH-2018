@@ -1,5 +1,6 @@
 function y = automationgg(a)
 i = imread(a);
+i=~i;
 [w,h] = size(i);
 sectionx = w*0.1;
 sectiony = h*0.5;
@@ -243,10 +244,7 @@ ctr1 = heartwidth1/lungwidth1;
 
 
 if(ctr<0.25) || (ctr>0.75)
-    ctrfinal = ctr1;
+    y = ctr1;
 else
-    ctrfinal = ctr;
-end
-
-y = ctrfinal;
+    y = ctr;
 end
