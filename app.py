@@ -1,14 +1,14 @@
 import os
 import shutil,time
 import random
+import matlab.engine
 
 from flask import Flask, flash, redirect, render_template, request,url_for
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 from werkzeug import secure_filename
-from flask.ext.mysqldb import MySQL 
+from flask_mysqldb import MySQL 
 
 from deeplearning.deeplearning import deepLearning
-from imageprocessing.imageprocessing import imageProcessing
 
 app = Flask(__name__)
 
@@ -22,6 +22,7 @@ mysql = MySQL(app)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'bmp'])
 
 # functions
+
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
@@ -65,7 +66,7 @@ def index():
 	
 @app.route('/uploader', methods = ['POST'])
 def uploader():
-
+	deleteImages("static/normal_images")
 	deleteImages("static/preprocessed_images")
 
 	if 'file' not in request.files:
@@ -79,20 +80,22 @@ def uploader():
 		f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		copyImages()
 
-	imageProcessing()
+	os.chdir('imageprocessing')	
+	os.system('python processing.py')
 
 	return redirect(url_for('report'))	
 
 @app.route('/report')
 def report():
+	os.chdir('D:\code\SIH-2018')
 	j=filecount('static/preprocessed_images')
 	result = [0] * j
 	ctr=[0] * j
 	for i in range(0,j):
-		result[i]=deepLearning()
+		result=deepLearning()
 		processed_img=getName('static/preprocessed_images')
-		ctr[i]=random.uniform(0.0, 0.99)
-		ctr[i]=round(ctr[i], 3)
+		# ctr[i]=random.uniform(0.0, 0.99)
+		# ctr[i]=round(ctr[i], 3)
 		os.system('cls')
 		# insertIntoDB(result)
 	return render_template('report.html',results=result,imgs=processed_img, ctr=ctr)

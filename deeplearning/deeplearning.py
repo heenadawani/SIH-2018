@@ -11,7 +11,7 @@ def deepLearning():
 
 	img_test_dir='D:\\code\\SIH-2018\\static\\preprocessed_images'
 
-	model_name="D:\\code\\SIH-2018\\deeplearning\\Processed_PA-0.001-100conv-basic-project-50.model"
+	model_name="D:\\code\\SIH-2018\\deeplearning\\Processed_PA-0.001-8tryconv-basic-project-50.model"
 
 	import tflearn
 	from tflearn.layers.conv import conv_2d, max_pool_2d
@@ -91,6 +91,8 @@ def deepLearning():
 
 	# plt.rcParams['figure.figsize'] = (15,15)
 
+	result=[]
+
 	for num,data in enumerate(test_img[:]):
 
 	    count=0
@@ -105,4 +107,8 @@ def deepLearning():
 	    if np.argmax(model_out) == 1: str_label='No Cardiomegaly'
 	    else: str_label='Cardiomegaly'
 	        
-	    return str_label
+	    result.append(str_label)
+
+	return result	    
+	# print(result)   
+# deepLearning()
