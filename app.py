@@ -116,7 +116,7 @@ def report():
 	disease=['Cardiomegaly','No Cardiomegaly']
 	gender=['M','F']
 	# os.chdir('D:\code\SIH-2018')
-	j=20
+	# j=20
 	result = [0] * j
 	ctr=[0] * j
 	sex=[0] * j
