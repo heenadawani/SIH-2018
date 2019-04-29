@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hridhyanam - We Care</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+  <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="static/css/animate.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+  <style>
+
+.footer {
+    position: absolute;
+    bottom: -1;
+    width: 100%;
+    background-color: #325C6A;
+}
+
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #0cb8b6;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"  onload="myFunction()">
+
+<script>
+var myVar;
+
+function myFunction() {
+    myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+
+<div id="loader"></div>
+
+<nav class="navbar navbar-default bg-report">
+    <div class="container">
+      <div class="col-md-12">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span style="color:white;font-family:'Josefin Sans';">Hridhyanam</span></a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Upload</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</nav>
+<div class="row">
+  <div class="container">
+    <center> <h1> Dashboard </h1> </center>
+  <div class="col-lg-3 col-md-3">
+  <div class="panel panel-red" style="background-color:#dc3545; color:white;">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    <span class="fa fa-close fa-5x"></span>
+                </div>
+                <div class="col-xs-3">
+                    <h5>Cardiomegaly:{{ countred }}</h5>
+                </div>
+            </div>
+        </div>
+  </div>
+</div>
+<div class="col-lg-3 col-md-3">
+<div class="panel panel-red" style="background-color:orange; color:white;">
+      <div class="panel-heading">
+          <div class="row">
+              <div class="col-xs-3">
+                  <span class="fa fa-close fa-5x"></span>
+              </div>
+              <div class="col-xs-3">
+                  <h5>Positive Edge case:{{ countorange }}</h5>
+              </div>
+          </div>
+      </div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3">
+<div class="panel panel-red" style="background-color:#ffc107; color:white;">
+      <div class="panel-heading">
+          <div class="row">
+              <div class="col-xs-3">
+                  <span class="fa fa-close fa-5x"></span>
+              </div>
+              <div class="col-xs-3">
+                  <h5>Negative Edge case:{{ countyellow }}</h5>
+              </div>
+          </div>
+      </div>
+</div>
+</div>
+<div class="col-lg-3 col-md-3">
+<div class="panel panel-green" style="background-color:#28a745; color:white;">
+      <div class="panel-heading">
+          <div class="row">
+              <div class="col-xs-5">
+                  <span class=" fa fa-check fa-5x"></span>
+              </div>
+              <div class="col-xs-1">
+                  <h5>Normal:{{ countgreen }}</h5>
+              </div>
+          </div>
+      </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id="myDiv" style="display:none;">
+  <section class="container">
+    <div class="jumbotron" style="background-color: white;">
+      <div class="row" style="display:inline;">
+        <div class="row">
+          {% for i in range(0,imgs|length) %}
+            {% if  results[i]=='Cardiomegaly' and ctr[i]>0.5 %}
+            <div class="col-md-4">
+              <div class="card" style="width: 20rem;border:2px #dc3545 solid;">
+                <div class="col-4">
+                <img class="d-block" src="static/preprocessed_images/{{imgs[i]}}" alt="Processed Image" width="250" height="250">
+                </div>
+                <div class="card-body">
+
+                  <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ imgs[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ results[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Gender : <span style="color:black;">{{ sex[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Age : <span style="color:black;">{{ age[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5> 
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row">
+          {% for i in range(0,imgs|length) %}
+            {% if  results[i]=='Cardiomegaly' and ctr[i]<0.5 %}
+            <div class="col-md-4">
+              <div class="card" style="width: 20rem;border:2px orange solid;">
+                <div class="col-4">
+                <img class="mx-auto d-block" src="static/preprocessed_images/{{imgs[i]}}" alt="Processed Image" width="250" height="250">
+                </div>
+                <div class="card-body">
+
+                  <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ imgs[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ results[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Gender : <span style="color:black;">{{ sex[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Age : <span style="color:black;">{{ age[i] }}</span></h5>
+  <!--                 <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5> -->
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row">
+          {% for i in range(0,imgs|length) %}
+            {% if  results[i]=='No Cardiomegaly' and ctr[i]>0.5 %}
+            <div class="col-md-4">
+              <div class="card" style="width: 20rem;border:2px yellow solid;">
+                <div class="col-4">
+                <img class="mx-auto d-block" src="static/preprocessed_images/{{imgs[i]}}" alt="Processed Image" width="250" height="250">
+                </div>
+                <div class="card-body">
+
+                  <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ imgs[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ results[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Gender : <span style="color:black;">{{ sex[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Age : <span style="color:black;">{{ age[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="row">
+          {% for i in range(0,imgs|length) %}
+            {% if  results[i]=='No Cardiomegaly' and ctr[i]<0.5 %}
+            <div class="col-md-4">
+              <div class="card" style="width: 20rem;border:3px green solid;">
+                <div class="col-4">
+                <img class="mx-auto d-block" src="static/preprocessed_images/{{imgs[i]}}" alt="Processed Image" width="250" height="250">
+                </div>
+                <div class="card-body">
+
+                  <h5 style="color:#325C6A;" class="card-title">Image Name : <span style="color:black;">{{ imgs[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Results : <span style="color:black;">{{ results[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Gender : <span style="color:black;">{{ sex[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">Age : <span style="color:black;">{{ age[i] }}</span></h5>
+                  <h5 style="color:#325C6A;" class="card-text">CTR : <span style="color:black;">{{ ctr[i] }}</span></h5>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+<footer class="footer">
+    <div class="footer-line bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            © Copyright Hridhyanam. All Rights Reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+</footer>
+
+</body>
+</html>
